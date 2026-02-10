@@ -107,5 +107,5 @@ class NamePossessionService:
             await client.api.call_action('set_qq_avatar', **payloads)
             return True
         except Exception as e:
-            logger.warning(f"[namepossession] 在切换头像时遇到报错e:{e}")
+            logger.warning(f"Error occurred while switching avatar: {e}", exc_info=True)
             return False
