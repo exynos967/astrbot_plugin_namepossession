@@ -14,8 +14,8 @@ from .storage import StateStore
 @register(
     "namepossession",
     "薄暝",
-    "随机夺舍 QQ 群友名字（群名）",
-    "1.0.0",
+    "随机夺舍 QQ 群友名字",
+    "1.1.0",
 )
 class NamePossessionPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
