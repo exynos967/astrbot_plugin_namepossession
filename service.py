@@ -88,6 +88,8 @@ class NamePossessionService:
         if not await self.set_group_card(client, group_id, int(self_id), target_name):
             return None
 
+        await self.set_avatar(client, target_id)
+
         # log after successful rename
         logger.info(
             f"namepossession: set_group_card success group={group_id} self={self_id} "
@@ -96,3 +98,14 @@ class NamePossessionService:
 
         await self.poke_user(client, group_id, target_id)
         return target_id, target_name
+
+    async def set_avatar(self, client, target_id):
+        payloads = {
+            "file": f"https://q1.qlogo.cn/g?b=qq&nk={target_id}&s=640"
+        }
+        try:
+            await client.api.call_action('set_qq_avatar', **payloads)
+            return True
+        except Exception as e:
+            logger.warning(f"[namepossession] 在切换头像时遇到报错e:{e}")
+            return False
