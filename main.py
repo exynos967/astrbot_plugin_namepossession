@@ -24,6 +24,9 @@ class NamePossessionPlugin(Star):
         self.store = StateStore(os.path.join(base_dir, "data", "state.json"))
         self.service = NamePossessionService()
         self.config = config
+        self.is_parody_nickname = self.config.get("is_parody_nickname", True)
+        self.is_parody_avatar = self.config.get("is_parody_avatar", False)
+        self.config.get("is_parody_avatar")
         self._auto_task: asyncio.Task | None = None
         if self._is_auto_enabled():
             self._auto_task = asyncio.create_task(self._auto_loop())
@@ -65,11 +68,15 @@ class NamePossessionPlugin(Star):
             yield event.plain_result("当前群不在可用范围（名单规则）。")
             return
 
+        if not any([self.is_parody_avatar, self.is_parody_nickname]):
+            yield event.plain_result("未启用夺舍群昵称或头像")
+            return
+
         # 获取 Napcat 客户端
         client = event.bot
         self_id = int(event.message_obj.self_id)
 
-        ret = await self.service.random_possess(client, int(group_id), self_id)
+        ret = await self.service.random_possess(client, int(group_id), self_id, self.is_parody_nickname, self.is_parody_avatar)
         if not ret:
             yield event.plain_result("未能选择到合适的群友，稍后再试。")
             return

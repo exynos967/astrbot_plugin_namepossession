@@ -65,7 +65,7 @@ class NamePossessionService:
         return (card or nickname or "群友").strip()
 
     async def random_possess(
-        self, client, group_id: int, self_id: int
+            self, client, group_id: int, self_id: int, enable_set_nickname=True, enable_set_avatar=False
     ) -> tuple[int, str] | None:
         """Pick a random member and set bot's group card to theirs.
 
@@ -85,10 +85,12 @@ class NamePossessionService:
         target_id = int(target.get("user_id"))
         target_name = self._display_name_of(target)
 
-        if not await self.set_group_card(client, group_id, int(self_id), target_name):
-            return None
+        if enable_set_nickname:
+            if not await self.set_group_card(client, group_id, int(self_id), target_name):
+                return None
 
-        await self.set_avatar(client, target_id)
+        if enable_set_avatar:
+            await self.set_avatar(client, target_id)
 
         # log after successful rename
         logger.info(

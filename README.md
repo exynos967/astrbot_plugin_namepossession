@@ -8,10 +8,12 @@
 注意：本插件仅在 QQ(OneBot/Napcat) 平台生效；不会伪装为其他用户发言，只会修改机器人自己的群名片。
 
 配置（AstrBot WebUI → 插件管理 → namepossession）
-- auto_enabled: 是否启用定时随机“夺舍”（通过配置控制，不提供手动开启/关闭指令）。
-- group_mode: 群名单模式，`whitelist`/`blacklist`/`none`。
-- group_list: 群号列表（数字或字符串均可），与 `group_mode` 共同生效。
-- auto_interval: 随机间隔（分钟）区间，包含 `min_minutes` 与 `max_minutes`。
+- `is_parody_nickname`：是否夺舍群昵称
+- `is_parody_avatar`：是否夺舍头像
+- `auto_enabled`: 是否启用定时随机“夺舍”（通过配置控制，不提供手动开启/关闭指令）。
+- `group_mode`: 群名单模式，`whitelist`/`blacklist`/`none`。
+- `group_list`: 群号列表（数字或字符串均可），与 `group_mode` 共同生效。
+- `auto_interval`: 随机间隔（分钟）区间，包含 `min_minutes` 与 `max_minutes`。
 
 行为说明
 - 定时模式：插件按配置的随机间隔，在允许的群中随机挑选一群执行一次“夺舍”。

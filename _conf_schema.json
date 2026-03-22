@@ -1,4 +1,14 @@
 {
+  "is_parody_nickname": {
+    "description": "是否夺舍群昵称",
+    "type": "bool",
+    "default": true
+  },
+  "is_parody_avatar": {
+    "description": "是否夺舍头像",
+    "type": "bool",
+    "default": false
+  },
   "auto_enabled": {
     "description": "是否启用随机夺舍",
     "type": "bool",
@@ -7,7 +17,11 @@
   "group_mode": {
     "description": "群名单模式",
     "type": "string",
-    "options": ["whitelist", "blacklist", "none"],
+    "options": [
+      "whitelist",
+      "blacklist",
+      "none"
+    ],
     "default": "none"
   },
   "group_list": {
